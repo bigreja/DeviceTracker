@@ -1,28 +1,29 @@
 import app from 'flarum/forum/app';
 import Notification from 'flarum/forum/components/Notification';
-import username from 'flarum/common/helpers/username';
 
 class DuplicateAccountNotification extends Notification {
   icon() {
-    return 'fas fa-clone';
+    return 'fas fa-shield-alt';
   }
 
   href() {
-    const actor = this.attrs.notification.fromUser();
-    return actor ? app.route.user(actor) : '#';
+    return app.route('admin') ? app.route('admin', { page: 'bigreja-device-tracker' }) : '#';
   }
 
   content() {
     const notification = this.attrs.notification;
     const data = notification.content() || {};
     const actor = notification.fromUser();
+    const actorName = actor ? actor.username() : (data.actor_username || 'Utilizador');
     const linked = Array.isArray(data.linked_usernames) ? data.linked_usernames.join(', ') : '';
 
     return [
-      'Conta duplicada: ',
-      actor ? username(actor) : (data.actor_username || '?'),
+      m('strong', 'Device Tracker: '),
+      'Conta duplicada detectada (',
+      m('strong', actorName),
       ' partilha dispositivo com ',
-      linked || 'outra conta'
+      m('strong', linked || 'outra conta'),
+      ')'
     ];
   }
 }
