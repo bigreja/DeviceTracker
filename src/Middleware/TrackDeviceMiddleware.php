@@ -1,6 +1,6 @@
 <?php
 
-namespace SuperBraga\DeviceTracker\Middleware;
+namespace Bigreja\DeviceTracker\Middleware;
 
 use Carbon\Carbon;
 use Dflydev\FigCookies\FigResponseCookies;
@@ -15,7 +15,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Ramsey\Uuid\Uuid;
-use SuperBraga\DeviceTracker\Notification\DuplicateAccountAlertBlueprint;
+use Bigreja\DeviceTracker\Notification\DuplicateAccountAlertBlueprint;
 
 class TrackDeviceMiddleware implements MiddlewareInterface
 {

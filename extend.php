@@ -1,9 +1,9 @@
 <?php
 
 use Flarum\Extend;
-use SuperBraga\DeviceTracker\Api\Controller\ListSharedDevicesController;
-use SuperBraga\DeviceTracker\Middleware\TrackDeviceMiddleware;
-use SuperBraga\DeviceTracker\Notification\DuplicateAccountAlertBlueprint;
+use Bigreja\DeviceTracker\Api\Controller\ListSharedDevicesController;
+use Bigreja\DeviceTracker\Middleware\TrackDeviceMiddleware;
+use Bigreja\DeviceTracker\Notification\DuplicateAccountAlertBlueprint;
 
 return [
     (new Extend\Frontend('admin'))

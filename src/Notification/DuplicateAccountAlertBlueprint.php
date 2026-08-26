@@ -1,6 +1,6 @@
 <?php
 
-namespace SuperBraga\DeviceTracker\Notification;
+namespace Bigreja\DeviceTracker\Notification;
 
 use Flarum\Notification\Blueprint\BlueprintInterface;
 use Flarum\User\User;

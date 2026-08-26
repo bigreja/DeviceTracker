@@ -1,8 +1,8 @@
 import app from 'flarum/admin/app';
 import SharedDevicesPage from './components/SharedDevicesPage';
 
-app.initializers.add('superbraga-device-tracker', () => {
+app.initializers.add('bigreja-device-tracker', () => {
   app.extensionData
-    .for('superbraga-device-tracker')
+    .for('bigreja-device-tracker')
     .registerPage(SharedDevicesPage);
 });

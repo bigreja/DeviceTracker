@@ -1,6 +1,6 @@
 <?php
 
-namespace SuperBraga\DeviceTracker\Api\Controller;
+namespace Bigreja\DeviceTracker\Api\Controller;
 
 use Flarum\Http\RequestUtil;
 use Flarum\User\Exception\PermissionDeniedException;

@@ -49,7 +49,7 @@ function syncDeviceId() {
   }
 }
 
-app.initializers.add('superbraga-device-tracker', () => {
+app.initializers.add('bigreja-device-tracker', () => {
   app.notificationComponents.duplicateAccountDetected = DuplicateAccountNotification;
   syncDeviceId();
 });

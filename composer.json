@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "SuperBraga\\DeviceTracker\\": "src/"
+      "Bigreja\\DeviceTracker\\": "src/"
     }
   },
   "extra": {
