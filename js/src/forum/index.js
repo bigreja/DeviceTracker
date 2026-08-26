@@ -7,16 +7,16 @@ class DuplicateAccountNotification extends Notification {
   }
 
   href() {
-    return app.route.user(this.attrs.notification.subject());
+    const subject = this.attrs.notification.subject();
+    return subject ? app.route.user(subject) : '#';
   }
 
   content() {
-    const notification = this.attrs.notification;
-    const data = notification.data();
-    const actor = notification.fromUser();
-    const linked = (data.linked_usernames || []).join(', ');
+    const data = this.attrs.notification.data() || {};
+    const actorName = data.actor_username || '?';
+    const linked = (data.linked_usernames || []).join(', ') || '?';
 
-    return `${actor.username()} partilhou o dispositivo com: ${linked}`;
+    return `Conta duplicada detectada: ${actorName} partilha dispositivo com ${linked}`;
   }
 }
 
