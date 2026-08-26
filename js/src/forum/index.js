@@ -7,7 +7,8 @@ class DuplicateAccountNotification extends Notification {
   }
 
   href() {
-    return app.route('admin') ? app.route('admin', { page: 'bigreja-device-tracker' }) : '#';
+    const actor = this.attrs.notification.fromUser();
+    return actor ? app.route.user(actor) : '#';
   }
 
   content() {
@@ -18,8 +19,7 @@ class DuplicateAccountNotification extends Notification {
     const linked = Array.isArray(data.linked_usernames) ? data.linked_usernames.join(', ') : '';
 
     return [
-      m('strong', 'Device Tracker: '),
-      'Conta duplicada detectada (',
+      'Device Tracker: Conta duplicada (',
       m('strong', actorName),
       ' partilha dispositivo com ',
       m('strong', linked || 'outra conta'),
