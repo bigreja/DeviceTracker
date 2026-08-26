@@ -8,23 +8,21 @@ class DuplicateAccountNotification extends Notification {
 
   href() {
     const actor = this.attrs.notification.fromUser();
-    return actor ? app.route.user(actor) : '#';
+    return actor && actor.username ? app.route('user', { username: actor.username() }) : '#';
   }
 
   content() {
     const notification = this.attrs.notification;
     const data = notification.content() || {};
     const actor = notification.fromUser();
-    const actorName = actor ? actor.username() : (data.actor_username || 'Utilizador');
+    const actorName = actor && actor.username ? actor.username() : (data.actor_username || 'Utilizador');
     const linked = Array.isArray(data.linked_usernames) ? data.linked_usernames.join(', ') : '';
 
-    return [
-      'Device Tracker: Conta duplicada (',
-      m('strong', actorName),
-      ' partilha dispositivo com ',
-      m('strong', linked || 'outra conta'),
-      ')'
-    ];
+    return `Device Tracker: Conta duplicada (${actorName} partilha dispositivo com ${linked || 'outra conta'})`;
+  }
+
+  excerpt() {
+    return this.content();
   }
 }
 
