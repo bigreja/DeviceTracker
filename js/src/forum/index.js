@@ -12,7 +12,7 @@ class DuplicateAccountNotification extends Notification {
   }
 
   content() {
-    const data = this.attrs.notification.data() || {};
+    const data = this.attrs.notification.content() || {};
     const actorName = data.actor_username || '?';
     const linked = (data.linked_usernames || []).join(', ') || '?';
 
