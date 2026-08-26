@@ -1,5 +1,6 @@
 import app from 'flarum/forum/app';
 import Notification from 'flarum/forum/components/Notification';
+import username from 'flarum/common/helpers/username';
 
 class DuplicateAccountNotification extends Notification {
   icon() {
@@ -7,16 +8,22 @@ class DuplicateAccountNotification extends Notification {
   }
 
   href() {
-    const subject = this.attrs.notification.subject();
-    return subject ? app.route.user(subject) : '#';
+    const actor = this.attrs.notification.fromUser();
+    return actor ? app.route.user(actor) : '#';
   }
 
   content() {
-    const data = this.attrs.notification.content() || {};
-    const actorName = data.actor_username || '?';
-    const linked = (data.linked_usernames || []).join(', ') || '?';
+    const notification = this.attrs.notification;
+    const data = notification.content() || {};
+    const actor = notification.fromUser();
+    const linked = Array.isArray(data.linked_usernames) ? data.linked_usernames.join(', ') : '';
 
-    return `Conta duplicada detectada: ${actorName} partilha dispositivo com ${linked}`;
+    return [
+      'Conta duplicada: ',
+      actor ? username(actor) : (data.actor_username || '?'),
+      ' partilha dispositivo com ',
+      linked || 'outra conta'
+    ];
   }
 }
 
