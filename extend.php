@@ -4,6 +4,7 @@ use Flarum\Extend;
 use Bigreja\DeviceTracker\Api\Controller\ListSharedDevicesController;
 use Bigreja\DeviceTracker\Middleware\TrackDeviceMiddleware;
 use Bigreja\DeviceTracker\Notification\DuplicateAccountAlertBlueprint;
+use Flarum\Api\Serializer\BasicUserSerializer;
 
 return [
     (new Extend\Frontend('admin'))
@@ -13,7 +14,7 @@ return [
         ->js(__DIR__ . '/js/dist/forum.js'),
 
     (new Extend\Notification())
-        ->type(DuplicateAccountAlertBlueprint::class, ['alert']),
+        ->type(DuplicateAccountAlertBlueprint::class, BasicUserSerializer::class, ['alert']),
 
     (new Extend\Routes('api'))
         ->get('/device-tracker/shared', 'device-tracker.shared.index', ListSharedDevicesController::class),
