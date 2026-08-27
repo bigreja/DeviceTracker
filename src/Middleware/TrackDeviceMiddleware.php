@@ -90,7 +90,6 @@ class TrackDeviceMiddleware implements MiddlewareInterface
                     ->withValue($deviceUuid)
                     ->withExpires(Carbon::now()->addYear()->toDateTimeString())
                     ->withPath('/')
-                    ->withHttpOnly(true)
                     ->withSecure(true)
                     ->withSameSite(\Dflydev\FigCookies\Modifier\SameSite::lax())
             );
