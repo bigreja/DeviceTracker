@@ -4,6 +4,7 @@ namespace Bigreja\DeviceTracker\Middleware;
 
 use Carbon\Carbon;
 use Dflydev\FigCookies\FigResponseCookies;
+use Dflydev\FigCookies\Modifier\SameSite;
 use Dflydev\FigCookies\SetCookie;
 use Flarum\Group\Group;
 use Flarum\Http\RequestUtil;
@@ -19,14 +20,12 @@ use Bigreja\DeviceTracker\Notification\DuplicateAccountAlertBlueprint;
 
 class TrackDeviceMiddleware implements MiddlewareInterface
 {
-    protected ConnectionInterface $db;
-    protected NotificationSyncer $notifications;
-    const COOKIE_NAME = 'sb_device_id';
+    public const string COOKIE_NAME = 'sb_device_id';
 
-    public function __construct(ConnectionInterface $db, NotificationSyncer $notifications)
-    {
-        $this->db = $db;
-        $this->notifications = $notifications;
+    public function __construct(
+        protected ConnectionInterface $db,
+        protected NotificationSyncer $notifications
+    ) {
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -91,7 +90,7 @@ class TrackDeviceMiddleware implements MiddlewareInterface
                     ->withExpires(Carbon::now()->addYear()->toDateTimeString())
                     ->withPath('/')
                     ->withSecure(true)
-                    ->withSameSite(\Dflydev\FigCookies\Modifier\SameSite::lax())
+                    ->withSameSite(SameSite::lax())
             );
         }
 

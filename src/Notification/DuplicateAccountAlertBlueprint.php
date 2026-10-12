@@ -2,10 +2,12 @@
 
 namespace Bigreja\DeviceTracker\Notification;
 
+use Flarum\Database\AbstractModel;
+use Flarum\Notification\AlertableInterface;
 use Flarum\Notification\Blueprint\BlueprintInterface;
 use Flarum\User\User;
 
-class DuplicateAccountAlertBlueprint implements BlueprintInterface
+class DuplicateAccountAlertBlueprint implements BlueprintInterface, AlertableInterface
 {
     public User $actor;
     public array $linkedUsernames;
@@ -23,7 +25,7 @@ class DuplicateAccountAlertBlueprint implements BlueprintInterface
         return $this->actor;
     }
 
-    public function getSubject(): ?User
+    public function getSubject(): ?AbstractModel
     {
         return $this->actor;
     }
