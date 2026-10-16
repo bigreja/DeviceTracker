@@ -30,6 +30,7 @@
       "category": "moderation",
       "database-support": [
         "mysql",
+        "mariadb",
         "pgsql",
         "sqlite"
       ]
